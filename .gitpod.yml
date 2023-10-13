@@ -1,0 +1,10 @@
+image: gitpod/workspace-full:latest
+tasks:
+  - name: Run Development
+    init: pnpm i
+    command: pnpm dev
+ports:
+  - name: Frontend
+    description: Port 3000 for the frontend
+    port: 3000
+    onOpen: open-browser
