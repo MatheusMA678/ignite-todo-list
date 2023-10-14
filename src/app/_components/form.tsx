@@ -7,15 +7,17 @@ import { api } from "@/_generated/api"
 
 export function Form() {
   const { isAuthenticated } = useConvexAuth()
-  const [task, setTask] = useState('')
+  const [content, setContent] = useState('')
   const createTask = useMutation(api.tasks.create)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     createTask({
-      content: task
+      content
     })
+
+    setContent('')
   }
 
   return (
@@ -24,10 +26,11 @@ export function Form() {
         type="text"
         name="task"
         id="task"
-        placeholder="Adicione uma nova tarefa"
-        className="flex-1 text-sm placeholder:text-base-gray-300 px-4 rounded-lg border-base-gray-700 bg-base-gray-500 border outline-none focus:border-product-purple transition-colors"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
+        required
+        placeholder={isAuthenticated ? "Adicione uma nova tarefa" : "Faça login"}
+        className="flex-1 placeholder:text-base-gray-300 px-4 rounded-lg border-base-gray-700 bg-base-gray-500 border outline-none focus:border-product-purple transition-colors disabled:opacity-80"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         disabled={!isAuthenticated}
       />
 

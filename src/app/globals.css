@@ -4,6 +4,6 @@
  
 @layer base {
   body {
-    @apply bg-base-gray-600 text-base-gray-100;
+    @apply bg-base-gray-600 text-base-gray-100 min-h-screen flex flex-col;
   }
 }

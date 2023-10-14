@@ -1,9 +1,16 @@
 "use client"
 
 import { SignInButton, UserButton } from '@clerk/clerk-react'
-import { Authenticated, Unauthenticated } from 'convex/react'
+import { Authenticated, Unauthenticated, useConvexAuth } from 'convex/react'
+import { Skeleton } from './skeleton'
 
 export function LoginButton() {
+  const { isLoading } = useConvexAuth()
+
+  if (isLoading) {
+    return <Skeleton className="w-8 h-8 rounded-full" />
+  }
+
   return (
     <>
       <Authenticated>
